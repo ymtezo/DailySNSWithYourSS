@@ -31,13 +31,17 @@ public class DataService: DataServiceProtocol {
     public func fetchRandomFollowingPosts(userId: String) async throws -> [Post] {
         // Mock implementation - replace with actual API calls
         try await Task.sleep(nanoseconds: 500_000_000)
-        return mockPosts().filter { _ in Bool.random() }
+        // Return a deterministic subset for consistency
+        let allPosts = mockPosts()
+        let count = min(5, allPosts.count)
+        return Array(allPosts.prefix(count))
     }
     
     public func fetchRandomGlobalPosts() async throws -> [Post] {
         // Mock implementation - replace with actual API calls
         try await Task.sleep(nanoseconds: 500_000_000)
-        return mockPosts().shuffled()
+        // Return all posts in consistent order for testing
+        return mockPosts()
     }
     
     public func createPost(_ post: Post) async throws -> Post {

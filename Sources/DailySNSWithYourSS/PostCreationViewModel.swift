@@ -42,13 +42,13 @@ public class PostCreationViewModel {
         currentItemType = .screenshot
     }
     
-    /// Remove an item from the post (mark as deleted)
+    /// Remove an item from the post (completely removes from array)
     public func removeItem(at index: Int) {
         guard index < postItems.count else { return }
-        postItems[index].isDeleted = true
+        postItems.remove(at: index)
     }
     
-    /// Remove an item by ID
+    /// Remove an item by ID (completely removes from array)
     public func removeItem(id: UUID) {
         if let index = postItems.firstIndex(where: { $0.id == id }) {
             postItems.remove(at: index)

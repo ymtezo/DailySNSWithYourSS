@@ -68,6 +68,7 @@ public class FeedViewModel {
     
     /// Switch between following and global feed
     public func switchFeedType(to type: FeedType) {
+        guard feedType != type else { return }
         feedType = type
         fetchPosts()
     }

@@ -55,9 +55,13 @@ public class PostCreationViewModel {
         }
     }
     
+    /// Get all non-deleted items
+    private var activeItems: [PostItem] {
+        postItems.filter { !$0.isDeleted }
+    }
+    
     /// Create the final post
     public func createPost(userId: String) -> Post {
-        let activeItems = postItems.filter { !$0.isDeleted }
         return Post(userId: userId, items: activeItems)
     }
     
@@ -70,7 +74,6 @@ public class PostCreationViewModel {
     
     /// Check if post can be submitted (at least one screenshot, comments optional)
     public var canSubmit: Bool {
-        let activeItems = postItems.filter { !$0.isDeleted }
         return activeItems.contains { $0.type == .screenshot }
     }
 }

@@ -75,7 +75,10 @@ import Foundation
     let viewModel = PostCreationViewModel()
     viewModel.addScreenshot(imageURL: "test.jpg")
     
-    let itemId = viewModel.postItems.first!.id
+    guard let itemId = viewModel.postItems.first?.id else {
+        #expect(Bool(false), "Expected at least one item")
+        return
+    }
     viewModel.removeItem(id: itemId)
     
     #expect(viewModel.postItems.isEmpty)

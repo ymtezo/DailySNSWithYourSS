@@ -53,7 +53,7 @@ public class DataService: DataServiceProtocol {
     public func fetchUser(id: UUID) async throws -> User {
         // Mock implementation - replace with actual API calls
         try await Task.sleep(nanoseconds: 500_000_000)
-        return mockUsers().first { $0.id == id } ?? mockUsers()[0]
+        return mockUsers().first { $0.id == id } ?? User(username: "unknown", displayName: "Unknown User")
     }
     
     // MARK: - Mock Data

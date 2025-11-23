@@ -4,18 +4,20 @@
 
 **English Version**: Screenshots are traces of your activities on the internet. Comments on them become a diary, and by sharing them with friends, they can also become conversation starters.
 
-## 🌍 クロスプラットフォーム対応 / Cross-Platform Support
+## 🌍 完全なクロスプラットフォーム対応 / Full Cross-Platform Support
 
-このプロジェクトはSwift Package Managerを使用した**クロスプラットフォーム対応**のライブラリです。
+このプロジェクトは**完全なクロスプラットフォーム対応**のスクリーンショット共有SNSアプリケーションです。
 
-This project is a **cross-platform** library using Swift Package Manager.
+This project is a **fully cross-platform** screenshot-sharing SNS application.
 
 ### サポートプラットフォーム / Supported Platforms
 
-- ✅ iOS 15.0+
-- ✅ macOS 12.0+
-- ✅ watchOS 8.0+
-- ✅ tvOS 15.0+
+- ✅ **iOS 15.0+** (Swift)
+- ✅ **macOS 12.0+** (Swift)
+- ✅ **watchOS 8.0+** (Swift)
+- ✅ **tvOS 15.0+** (Swift)
+- ✅ **Web** (TypeScript/JavaScript)
+- ✅ **Android 7.0+** (Kotlin)
 
 ## 📱 主な機能 / Main Features
 
@@ -43,69 +45,127 @@ This project is a **cross-platform** library using Swift Package Manager.
 
 ```
 DailySNSWithYourSS/
-├── Package.swift                      # Swift Package configuration
-├── Sources/DailySNSWithYourSS/
-│   ├── Models/                        # Data models
-│   │   ├── Post.swift                 # Post and PostItem
-│   │   └── User.swift                 # User and Album
-│   ├── ViewModels/                    # Business logic
-│   │   ├── PostCreationViewModel.swift
-│   │   ├── AlbumViewModel.swift
-│   │   └── FeedViewModel.swift
-│   └── Services/                      # Data services
-│       └── DataService.swift
-└── Tests/DailySNSWithYourSSTests/     # Unit tests
+├── Package.swift                      # Swift Package (iOS/macOS/watchOS/tvOS)
+├── Sources/DailySNSWithYourSS/        # Swift実装
+│   ├── Models/
+│   ├── ViewModels/
+│   └── Services/
+├── web/                               # Web版 (TypeScript)
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── src/
+│       ├── models/
+│       ├── viewmodels/
+│       └── services/
+├── android/                           # Android版 (Kotlin)
+│   ├── app/build.gradle
+│   └── app/src/main/java/com/dailysns/
+│       ├── models/
+│       ├── viewmodels/
+│       └── services/
+├── Tests/                             # テスト
+├── README.md                          # このファイル
+├── ARCHITECTURE.md                    # アーキテクチャドキュメント
+├── EXAMPLES.md                        # 使用例
+└── SUMMARY.md                         # 実装サマリー
 ```
-
-詳細なアーキテクチャについては [ARCHITECTURE.md](ARCHITECTURE.md) を参照してください。
-
-For detailed architecture information, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## 🚀 クイックスタート / Quick Start
 
-### ビルド / Build
+### iOS / macOS / watchOS / tvOS (Swift)
 
 ```bash
-# Build the package
+# Build the Swift package
 swift build
 
 # Run tests
 swift test
-```
 
-### Xcodeで開く / Open in Xcode
-
-```bash
-# Generate Xcode project
-swift package generate-xcodeproj
-
-# Or open Package.swift directly in Xcode (recommended)
+# Or open in Xcode
 open Package.swift
 ```
 
-### 使用例 / Usage Example
+詳細は [ARCHITECTURE.md](ARCHITECTURE.md) を参照。
 
-```swift
-import DailySNSWithYourSS
+### Web版 (TypeScript)
 
-// 投稿作成 / Create a post
-let postVM = PostCreationViewModel()
-postVM.addScreenshot(imageURL: "screenshot.jpg")
-postVM.addComment(text: "Daily screenshot!")
-let post = postVM.createPost(userId: "user123")
+```bash
+cd web
+npm install
+npm run build
+npm test
+```
 
-// アルバム閲覧 / View albums
-let albumVM = AlbumViewModel()
-albumVM.fetchAlbums()
+詳細は [web/README.md](web/README.md) を参照。
 
-// フィード表示 / Display feed
-let feedVM = FeedViewModel(currentUserId: "user123")
-feedVM.fetchPosts()
+### Android版 (Kotlin)
+
+```bash
+cd android
+./gradlew build
+./gradlew test
+```
+
+詳細は [android/README.md](android/README.md) を参照。
+
+## 📊 プラットフォーム別実装 / Platform Implementations
+
+| Platform | Language | UI Framework | State Management |
+|----------|----------|--------------|------------------|
+| iOS/macOS/watchOS/tvOS | Swift | SwiftUI | Combine/@Published |
+| Web | TypeScript | HTML/React | Observer Pattern |
+| Android | Kotlin | Jetpack Compose | Flow/StateFlow |
+
+## 🔧 技術スタック / Technology Stack
+
+### Swift (Apple Platforms)
+- Swift 5.9+
+- Swift Package Manager
+- Combine Framework
+- Async/Await
+- Codable/Sendable
+
+### TypeScript (Web)
+- TypeScript 5.0+
+- ES2020
+- Jest (Testing)
+- ESLint
+
+### Kotlin (Android)
+- Kotlin 1.9+
+- Jetpack Compose
+- Kotlin Coroutines
+- Kotlin Flow
+- Kotlin Serialization
+
+## 📖 ドキュメント / Documentation
+
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - 詳細なアーキテクチャ説明（日英バイリンガル）
+- **[EXAMPLES.md](EXAMPLES.md)** - 使用例とサンプルコード
+- **[SUMMARY.md](SUMMARY.md)** - 実装サマリー
+- **[web/README.md](web/README.md)** - Web版ドキュメント
+- **[android/README.md](android/README.md)** - Android版ドキュメント
+
+## 🧪 テスト / Testing
+
+すべてのプラットフォームで包括的なテストを実装しています。
+
+Comprehensive tests are implemented for all platforms.
+
+```bash
+# Swift (iOS/macOS/etc.)
+swift test
+
+# Web (TypeScript)
+cd web && npm test
+
+# Android (Kotlin)
+cd android && ./gradlew test
 ```
 
 ## 📦 依存関係への追加 / Add as Dependency
 
-### Package.swift
+### Swift Package Manager (iOS/macOS/watchOS/tvOS)
 
 ```swift
 dependencies: [
@@ -113,19 +173,23 @@ dependencies: [
 ]
 ```
 
-## 🧪 テスト / Testing
+### npm (Web)
 
-```bash
-# Run all tests
-swift test
-
-# Run tests with coverage
-swift test --enable-code-coverage
+```json
+{
+  "dependencies": {
+    "dailysns-web": "file:./path/to/web"
+  }
+}
 ```
 
-## 📄 ライセンス / License
+### Gradle (Android)
 
-See [LICENSE](LICENSE) file.
+```gradle
+dependencies {
+    implementation project(':dailysns-android')
+}
+```
 
 ## 🤝 コントリビューション / Contributing
 
@@ -133,9 +197,14 @@ See [LICENSE](LICENSE) file.
 
 Pull requests are welcome!
 
+## 📄 ライセンス / License
+
+See [LICENSE](LICENSE) file.
+
 ## 📞 お問い合わせ / Contact
 
 Issue trackerをご利用ください。
 
 Please use the issue tracker.
+
 

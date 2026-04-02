@@ -206,5 +206,3 @@ See [LICENSE](LICENSE) file.
 Issue trackerをご利用ください。
 
 Please use the issue tracker.
-
-
